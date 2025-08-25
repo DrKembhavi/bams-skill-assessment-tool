@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ayurveda Intern Self-Assessment Tool</title>
+
+    <style>
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+ 
+
+        body {
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            min-height: 100vh;
+
+            padding: 20px;
+
+        }
+
+ 
+
+        .container {
+
+            max-width: 900px;
+
+            margin: 0 auto;
+
+            background: white;
+
+            border-radius: 20px;
+
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+
+            overflow: hidden;
+
+        }
+
+ 
+
+        .header {
+
+            background: linear-gradient(135deg, #2c5530 0%, #4a7c59 100%);
+
+            color: white;
+
+            padding: 30px;
+
+            text-align: center;
+
+        }
+
+ 
+
+        .header h1 {
+
+            font-size: 2.5em;
+
+            margin-bottom: 10px;
+
+            font-weight: 600;
+
+        }
+
+ 
+
+        .header p {
+
+            font-size: 1.1em;
+
+            opacity: 0.9;
+
+        }
+
+ 
+
+        .form-container {
+
+            padding: 40px;
+
+        }
+
+ 
+
+        .personal-info {
+
+            background: #f8f9ff;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            margin-bottom: 30px;
+
+            border-left: 5px solid #667eea;
+
+        }
+
+ 
+
+        .personal-info h3 {
+
+            color: #2c5530;
+
+            margin-bottom: 20px;
+
+            font-size: 1.3em;
+
+        }
+
+ 
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 20px;
+
+            margin-bottom: 20px;
+
+        }
+
+ 
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+ 
+
+        .form-group label {
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+
+            color: #333;
+
+        }
+
+ 
+
+        .form-group input, .form-group select {
+
+            padding: 12px;
+
+            border: 2px solid #e1e8ed;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            transition: all 0.3s ease;
+
+        }
+
+ 
+
+        .form-group input:focus, .form-group select:focus {
+
+            outline: none;
+
+            border-color: #667eea;
+
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+
+        }
+
+ 
+
+        .skill-category {
+
+            background: white;
+
+            border: 2px solid #f0f2f5;
+
+            border-radius: 15px;
+
+            margin-bottom: 25px;
+
+            overflow: hidden;
+
+            transition: all 0.3s ease;
+
+        }
+
+ 
+
+        .skill-category:hover {
+
+            border-color: #667eea;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+        }
+
+ 
+
+        .category-header {
+
+            background: linear-gradient(135deg, #f8f9ff 0%, #e6edff 100%);
+
+            padding: 20px;
+
+            cursor: pointer;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom: 2px solid #f0f2f5;
+
+        }
+
+ 
+
+        .category-header h3 {
+
+            color: #2c5530;
+
+            font-size: 1.2em;
+
+            font-weight: 600;
+
+        }
+
+ 
+
+        .toggle-icon {
+
+            background: #667eea;
+
+            color: white;
+
+            width: 30px;
+
+            height: 30px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+
+            transition: all 0.3s ease;
+
+        }
+
+ 
+
+        .category-content {
+
+            padding: 25px;
+
+            display: none;
+
+        }
+
+ 
+
+        .category-content.active {
+
+            display: block;
+
+            animation: slideDown 0.3s ease;
+
+        }
+
+ 
+
+        @keyframes slideDown {
+
+            from { opacity: 0; transform: translateY(-10px); }
+
+            to { opacity: 1; transform: translateY(0); }
+
+        }
+
+ 
+
+        .skill-item {
+
+            margin-bottom: 20px;
+
+            padding: 15px;
+
+            background: #fafbfc;
+
+            border-radius: 10px;
+
+            border-left: 4px solid #667eea;
+
+        }
+
+ 
+
+        .skill-item label {
+
+            display: block;
+
+            font-weight: 500;
+
+            margin-bottom: 12px;
+
+            color: #333;
+
+            line-height: 1.4;
+
+        }
+
+ 
+
+        .rating-scale {
+
+            display: flex;
+
+            gap: 10px;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+        }
+
+ 
+
+        .rating-option {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            padding: 8px 15px;
+
+            background: white;
+
+            border: 2px solid #e1e8ed;
+
+            border-radius: 25px;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+
+            font-size: 14px;
+
+        }
+
+ 
+
+        .rating-option:hover {
+
+            border-color: #667eea;
+
+            background: #f8f9ff;
+
+        }
+
+ 
+
+        .rating-option input[type="radio"] {
+
+            margin: 0;
+
+        }
+
+ 
+
+        .rating-option.selected {
+
+            background: #667eea;
+
+            color: white;
+
+            border-color: #667eea;
+
+        }
+
+ 
+
+        .submit-section {
+
+            text-align: center;
+
+            padding: 30px;
+
+            background: #f8f9ff;
+
+            border-radius: 15px;
+
+            margin-top: 30px;
+
+        }
+
+ 
+
+        .submit-btn {
+
+            background: linear-gradient(135deg, #2c5530 0%, #4a7c59 100%);
+
+            color: white;
+
+            padding: 15px 40px;
+
+            border: none;
+
+            border-radius: 50px;
+
+            font-size: 1.1em;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+
+            box-shadow: 0 5px 15px rgba(44, 85, 48, 0.3);
+
+        }
+
+ 
+
+        .submit-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 7px 20px rgba(44, 85, 48, 0.4);
+
+        }
+
+ 
+
+        .results-section {
+
+            display: none;
+
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 30px;
+
+            margin-top: 30px;
+
+            border: 2px solid #e6edff;
+
+        }
+
+ 
+
+        .results-header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+        }
+
+ 
+
+        .results-header h2 {
+
+            color: #2c5530;
+
+            font-size: 2em;
+
+            margin-bottom: 10px;
+
+        }
+
+ 
+
+        .overall-score {
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            color: white;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+        }
+
+ 
+
+        .overall-score h3 {
+
+            font-size: 1.5em;
+
+            margin-bottom: 10px;
+
+        }
+
+ 
+
+        .score-display {
+
+            font-size: 3em;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+
+        }
+
+ 
+
+        .category-results {
+
+            display: grid;
+
+            gap: 20px;
+
+        }
+
+ 
+
+        .category-result {
+
+            background: #fafbfc;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            border-left: 4px solid #667eea;
+
+        }
+
+ 
+
+        .category-result h4 {
+
+            color: #2c5530;
+
+            margin-bottom: 10px;
+
+            font-size: 1.1em;
+
+        }
+
+ 
+
+        .progress-bar {
+
+            background: #e1e8ed;
+
+            height: 10px;
+
+            border-radius: 5px;
+
+            overflow: hidden;
+
+            margin-bottom: 8px;
+
+        }
+
+ 
+
+        .progress-fill {
+
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+
+            height: 100%;
+
+            transition: width 0.5s ease;
+
+            border-radius: 5px;
+
+        }
+
+ 
+
+        .recommendations {
+
+            background: #fff3cd;
+
+            border: 1px solid #ffeaa7;
+
+            border-radius: 10px;
+
+            padding: 20px;
+
+            margin-top: 20px;
+
+        }
+
+ 
+
+        .recommendations h4 {
+
+            color: #856404;
+
+            margin-bottom: 15px;
+
+        }
+
+ 
+
+        .recommendations ul {
+
+            color: #856404;
+
+            padding-left: 20px;
+
+        }
+
+ 
+
+        .recommendations li {
+
+            margin-bottom: 5px;
+
+        }
+
+ 
+
+        @media (max-width: 768px) {
+
+            .container {
+
+                margin: 10px;
+
+                border-radius: 15px;
+
+            }
+
+           
+
+            .form-container {
+
+                padding: 20px;
+
+            }
+
+           
+
+            .header {
+
+                padding: 20px;
+
+            }
+
+           
+
+            .header h1 {
+
+                font-size: 2em;
+
+            }
+
+           
+
+            .rating-scale {
+
+                justify-content: center;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <h1>🕉️ Ayurveda Intern Self-Assessment</h1>
+
+            <p>Comprehensive Skills Evaluation Tool</p>
+
+        </div>
+
+ 
+
+        <div class="form-container">
+
+            <form id="assessmentForm">
+
+                <!-- Personal Information -->
+
+                <div class="personal-info">
+
+                    <h3>Personal Information</h3>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="name">Full Name *</label>
+
+                            <input type="text" id="name" name="name" required>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="college">College Name *</label>
+
+                            <input type="text" id="college" name="college" required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="year">Year of Study *</label>
+
+                            <select id="year" name="year" required>
+
+                                <option value="">Select Year</option>
+
+                                <option value="1st Year">1st Year</option>
+
+                                <option value="2nd Year">2nd Year</option>
+
+                                <option value="3rd Year">3rd Year</option>
+
+                                <option value="4th Year">4th Year</option>
+
+                                <option value="Final Year">Final Year</option>
+
+                                <option value="Internship">Internship</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="experience">Clinical Experience (Months)</label>
+
+                            <input type="number" id="experience" name="experience" min="0" max="60">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Skill Categories -->
+
+                <div class="skill-category">
+
+                    <div class="category-header" onclick="toggleCategory(this)">
+
+                        <h3>📚 Basic Academic Skills</h3>
+
+                        <div class="toggle-icon">+</div>
+
+                    </div>
+
+                    <div class="category-content">
+
+                        <div class="skill-item">
+
+                            <label>Understanding of Ayurvedic fundamentals (Doshas, Dhatus, Malas)</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="academic_fundamentals" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="academic_fundamentals" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="academic_fundamentals" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="academic_fundamentals" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="academic_fundamentals" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Knowledge of Classical Ayurvedic texts (Charaka, Sushruta, Ashtanga Hridaya)</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="classical_texts" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="classical_texts" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="academic_fundamentals" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="classical_texts" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="classical_texts" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Understanding of Pathophysiology in Ayurvedic context</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="pathophysiology" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="pathophysiology" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="pathophysiology" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="pathophysiology" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="pathophysiology" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="skill-category">
+
+                    <div class="category-header" onclick="toggleCategory(this)">
+
+                        <h3>🩺 Clinical Skills</h3>
+
+                        <div class="toggle-icon">+</div>
+
+                    </div>
+
+                    <div class="category-content">
+
+                        <div class="skill-item">
+
+                            <label>History Taking Skills (Rogi Pariksha)</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="history_taking" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="history_taking" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="history_taking" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="history_taking" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="history_taking" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Physical Examination (Darshan, Sparshan, Prashna)</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="physical_exam" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="physical_exam" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="physical_exam" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="physical_exam" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="physical_exam" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Pulse Diagnosis (Nadi Pariksha)</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="pulse_diagnosis" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="pulse_diagnosis" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="pulse_diagnosis" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="pulse_diagnosis" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="pulse_diagnosis" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Constitutional Assessment (Prakriti Pariksha)</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="constitutional_assessment" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="constitutional_assessment" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="constitutional_assessment" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="constitutional_assessment" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="constitutional_assessment" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="skill-category">
+
+                    <div class="category-header" onclick="toggleCategory(this)">
+
+                        <h3>🔬 Diagnostic & Investigation Skills</h3>
+
+                        <div class="toggle-icon">+</div>
+
+                    </div>
+
+                    <div class="category-content">
+
+                        <div class="skill-item">
+
+                            <label>Laboratory Values Interpretation</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="lab_interpretation" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="lab_interpretation" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="lab_interpretation" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="lab_interpretation" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="lab_interpretation" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>USG/X-ray Interpretation</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="imaging_interpretation" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="imaging_interpretation" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="imaging_interpretation" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="imaging_interpretation" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="imaging_interpretation" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>ECG Interpretation</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="ecg_interpretation" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="ecg_interpretation" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="ecg_interpretation" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="ecg_interpretation" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="ecg_interpretation" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Differential Diagnosis Skills</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="differential_diagnosis" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="differential_diagnosis" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="differential_diagnosis" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="differential_diagnosis" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="differential_diagnosis" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="skill-category">
+
+                    <div class="category-header" onclick="toggleCategory(this)">
+
+                        <h3>💊 Treatment & Prescription Skills</h3>
+
+                        <div class="toggle-icon">+</div>
+
+                    </div>
+
+                    <div class="category-content">
+
+                        <div class="skill-item">
+
+                            <label>Treatment Planning (Chikitsa Sutra)</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="treatment_planning" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="treatment_planning" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="treatment_planning" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="treatment_planning" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="treatment_planning" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Knowledge of Single Herbs (Dravyaguna)</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="single_herbs" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="single_herbs" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="single_herbs" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="single_herbs" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="single_herbs" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Knowledge of Formulations (Yoga/Kalpa)</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="formulations" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="formulations" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="formulations" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="formulations" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="formulations" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Prescription Writing Skills</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="prescription_writing" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="prescription_writing" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="prescription_writing" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="prescription_writing" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="prescription_writing" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="skill-category">
+
+                    <div class="category-header" onclick="toggleCategory(this)">
+
+                        <h3>🍽️ Diet & Lifestyle Planning</h3>
+
+                        <div class="toggle-icon">+</div>
+
+                    </div>
+
+                    <div class="category-content">
+
+                        <div class="skill-item">
+
+                            <label>Diet Planning (Pathya-Apathya)</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="diet_planning" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="diet_planning" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="diet_planning" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="diet_planning" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="diet_planning" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Lifestyle Counseling (Vihara)</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="lifestyle_counseling" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="lifestyle_counseling" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="lifestyle_counseling" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="lifestyle_counseling" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="lifestyle_counseling" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Seasonal Regimen Planning (Ritucharya)</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="seasonal_regimen" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="seasonal_regimen" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="seasonal_regimen" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="seasonal_regimen" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="seasonal_regimen" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="skill-category">
+
+                    <div class="category-header" onclick="toggleCategory(this)">
+
+                        <h3>🛁 Panchakarma & Surgical Skills</h3>
+
+                        <div class="toggle-icon">+</div>
+
+                    </div>
+
+                    <div class="category-content">
+
+                        <div class="skill-item">
+
+                            <label>Panchakarma Procedures Knowledge</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="panchakarma_knowledge" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="panchakarma_knowledge" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="panchakarma_knowledge" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="panchakarma_knowledge" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="panchakarma_knowledge" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Panchakarma Practical Skills</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="panchakarma_practical" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="panchakarma_practical" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="panchakarma_practical" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="panchakarma_practical" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="panchakarma_practical" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Basic Surgical Skills (Shastra Karma)</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="surgical_skills" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="surgical_skills" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="surgical_skills" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="surgical_skills" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="surgical_skills" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Kshara Sutra & Para-surgical Procedures</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="parasurgical" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="parasurgical" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="parasurgical" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="parasurgical" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="parasurgical" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="skill-category">
+
+                    <div class="category-header" onclick="toggleCategory(this)">
+
+                        <h3>💉 Modern Medicine Knowledge</h3>
+
+                        <div class="toggle-icon">+</div>
+
+                    </div>
+
+                    <div class="category-content">
+
+                        <div class="skill-item">
+
+                            <label>Basic Modern Medicine Knowledge</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="modern_medicine" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="modern_medicine" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="modern_medicine" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="modern_medicine" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="modern_medicine" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Emergency Medicine Skills</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="emergency_medicine" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="emergency_medicine" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="emergency_medicine" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="emergency_medicine" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="emergency_medicine" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Drug Interactions & Contraindications</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="drug_interactions" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="drug_interactions" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="drug_interactions" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="drug_interactions" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="drug_interactions" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Referral Skills & Case Management</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="referral_skills" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="referral_skills" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="referral_skills" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="referral_skills" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="referral_skills" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="skill-category">
+
+                    <div class="category-header" onclick="toggleCategory(this)">
+
+                        <h3>🧠 Analytical & Reasoning Skills</h3>
+
+                        <div class="toggle-icon">+</div>
+
+                    </div>
+
+                    <div class="category-content">
+
+                        <div class="skill-item">
+
+                            <label>Clinical Reasoning & Problem Solving</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="clinical_reasoning" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="clinical_reasoning" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="clinical_reasoning" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="clinical_reasoning" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="clinical_reasoning" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Critical Thinking & Analysis</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="critical_thinking" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="critical_thinking" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="critical_thinking" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="critical_thinking" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="critical_thinking" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Evidence-based Practice Integration</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="evidence_based" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="evidence_based" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="evidence_based" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="evidence_based" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="evidence_based" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="skill-category">
+
+                    <div class="category-header" onclick="toggleCategory(this)">
+
+                        <h3>❤️ Professional Attitude & Behavior</h3>
+
+                        <div class="toggle-icon">+</div>
+
+                    </div>
+
+                    <div class="category-content">
+
+                        <div class="skill-item">
+
+                            <label>Empathy & Patient Communication</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="empathy" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="empathy" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="empathy" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="empathy" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="empathy" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Professional Ethics & Conduct</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="professional_ethics" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="professional_ethics" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="professional_ethics" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="professional_ethics" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="professional_ethics" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Teamwork & Collaboration</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="teamwork" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="teamwork" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="teamwork" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="teamwork" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="teamwork" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Self-reflection & Continuous Learning</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="self_reflection" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="self_reflection" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="self_reflection" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="self_reflection" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="self_reflection" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="skill-item">
+
+                            <label>Cultural Sensitivity & Patient-Centered Care</label>
+
+                            <div class="rating-scale">
+
+                                <div class="rating-option"><input type="radio" name="cultural_sensitivity" value="1"> 1 - Poor</div>
+
+                                <div class="rating-option"><input type="radio" name="cultural_sensitivity" value="2"> 2 - Below Average</div>
+
+                                <div class="rating-option"><input type="radio" name="cultural_sensitivity" value="3"> 3 - Average</div>
+
+                                <div class="rating-option"><input type="radio" name="cultural_sensitivity" value="4"> 4 - Good</div>
+
+                                <div class="rating-option"><input type="radio" name="cultural_sensitivity" value="5"> 5 - Excellent</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <div class="submit-section">
+
+                    <button type="submit" class="submit-btn">Generate Assessment Report</button>
+
+                </div>
+
+            </form>
+
+ 
+
+            <div class="results-section" id="resultsSection">
+
+                <div class="results-header">
+
+                    <h2>📊 Your Assessment Results</h2>
+
+                    <p id="studentInfo"></p>
+
+                </div>
+
+ 
+
+                <div class="overall-score">
+
+                    <h3>Overall Competency Score</h3>
+
+                    <div class="score-display" id="overallScore">0%</div>
+
+                    <p id="overallLevel">Assessment Pending</p>
+
+                </div>
+
+ 
+
+                <div class="category-results" id="categoryResults">
+
+                    <!-- Category results will be populated here -->
+
+                </div>
+
+ 
+
+                <div class="recommendations" id="recommendations">
+
+                    <h4>📝 Recommendations for Improvement</h4>
+
+                    <ul id="recommendationsList">
+
+                        <!-- Recommendations will be populated here -->
+
+                    </ul>
+
+                </div>
+
+ 
+
+                <div style="text-align: center; margin-top: 30px;">
+
+                    <button onclick="printResults()" class="submit-btn" style="margin-right: 15px;">🖨️ Print Report</button>
+
+                    <button onclick="resetAssessment()" class="submit-btn" style="background: #6c757d;">🔄 New Assessment</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+ 
+
+    <script>
+
+        // Store assessment data
+
+        let assessmentData = {};
+
+ 
+
+        // Toggle category visibility
+
+        function toggleCategory(header) {
+
+            const content = header.nextElementSibling;
+
+            const icon = header.querySelector('.toggle-icon');
+
+           
+
+            if (content.classList.contains('active')) {
+
+                content.classList.remove('active');
+
+                icon.textContent = '+';
+
+            } else {
+
+                content.classList.add('active');
+
+                icon.textContent = '−';
+
+            }
+
+        }
+
+ 
+
+        // Handle radio button selection styling
+
+        document.addEventListener('change', function(e) {
+
+            if (e.target.type === 'radio') {
+
+                const name = e.target.name;
+
+                const allOptions = document.querySelectorAll(`input[name="${name}"]`);
+
+               
+
+                allOptions.forEach(option => {
+
+                    const parent = option.closest('.rating-option');
+
+                    parent.classList.remove('selected');
+
+                });
+
+               
+
+                const selectedParent = e.target.closest('.rating-option');
+
+                selectedParent.classList.add('selected');
+
+            }
+
+        });
+
+ 
+
+        // Form submission handler
+
+        document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+
+            e.preventDefault();
+
+           
+
+            const formData = new FormData(e.target);
+
+            assessmentData = {};
+
+           
+
+            for (let [key, value] of formData.entries()) {
+
+                assessmentData[key] = value;
+
+            }
+
+           
+
+            generateResults();
+
+        });
+
+ 
+
+        function generateResults() {
+
+            // Calculate scores for each category
+
+            const categories = {
+
+                'Basic Academic Skills': ['academic_fundamentals', 'classical_texts', 'pathophysiology'],
+
+                'Clinical Skills': ['history_taking', 'physical_exam', 'pulse_diagnosis', 'constitutional_assessment'],
+
+                'Diagnostic & Investigation Skills': ['lab_interpretation', 'imaging_interpretation', 'ecg_interpretation', 'differential_diagnosis'],
+
+                'Treatment & Prescription Skills': ['treatment_planning', 'single_herbs', 'formulations', 'prescription_writing'],
+
+                'Diet & Lifestyle Planning': ['diet_planning', 'lifestyle_counseling', 'seasonal_regimen'],
+
+                'Panchakarma & Surgical Skills': ['panchakarma_knowledge', 'panchakarma_practical', 'surgical_skills', 'parasurgical'],
+
+                'Modern Medicine Knowledge': ['modern_medicine', 'emergency_medicine', 'drug_interactions', 'referral_skills'],
+
+                'Analytical & Reasoning Skills': ['clinical_reasoning', 'critical_thinking', 'evidence_based'],
+
+                'Professional Attitude & Behavior': ['empathy', 'professional_ethics', 'teamwork', 'self_reflection', 'cultural_sensitivity']
+
+            };
+
+ 
+
+            let totalScore = 0;
+
+            let totalItems = 0;
+
+            const categoryScores = {};
+
+ 
+
+            // Calculate category scores
+
+            Object.keys(categories).forEach(category => {
+
+                const skills = categories[category];
+
+                let categoryTotal = 0;
+
+                let categoryItems = 0;
+
+ 
+
+                skills.forEach(skill => {
+
+                    if (assessmentData[skill]) {
+
+                        categoryTotal += parseInt(assessmentData[skill]);
+
+                        categoryItems++;
+
+                    }
+
+                });
+
+ 
+
+                if (categoryItems > 0) {
+
+                    const categoryAverage = (categoryTotal / categoryItems);
+
+                    categoryScores[category] = {
+
+                        score: categoryAverage,
+
+                        percentage: (categoryAverage / 5) * 100
+
+                    };
+
+                    totalScore += categoryTotal;
+
+                    totalItems += categoryItems;
+
+                }
+
+            });
+
+ 
+
+            const overallPercentage = totalItems > 0 ? ((totalScore / totalItems) / 5) * 100 : 0;
+
+ 
+
+            // Display results
+
+            displayResults(overallPercentage, categoryScores);
+
+        }
+
+ 
+
+        function displayResults(overallPercentage, categoryScores) {
+
+            // Show results section
+
+            document.getElementById('resultsSection').style.display = 'block';
+
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+
+ 
+
+            // Display student info
+
+            const studentInfo = `${assessmentData.name} - ${assessmentData.college} (${assessmentData.year})`;
+
+            document.getElementById('studentInfo').textContent = studentInfo;
+
+ 
+
+            // Display overall score
+
+            document.getElementById('overallScore').textContent = Math.round(overallPercentage) + '%';
+
+           
+
+            let level = '';
+
+            let levelColor = '';
+
+            if (overallPercentage >= 90) {
+
+                level = 'Excellent - Outstanding Performance';
+
+                levelColor = '#28a745';
+
+            } else if (overallPercentage >= 80) {
+
+                level = 'Good - Above Average Performance';
+
+                levelColor = '#17a2b8';
+
+            } else if (overallPercentage >= 70) {
+
+                level = 'Average - Satisfactory Performance';
+
+                levelColor = '#ffc107';
+
+            } else if (overallPercentage >= 60) {
+
+                level = 'Below Average - Needs Improvement';
+
+                levelColor = '#fd7e14';
+
+            } else {
+
+                level = 'Poor - Significant Improvement Required';
+
+                levelColor = '#dc3545';
+
+            }
+
+ 
+
+            const overallLevelElement = document.getElementById('overallLevel');
+
+            overallLevelElement.textContent = level;
+
+            overallLevelElement.style.color = levelColor;
+
+ 
+
+            // Display category results
+
+            const categoryResultsHTML = Object.keys(categoryScores).map(category => {
+
+                const data = categoryScores[category];
+
+                return `
+
+                    <div class="category-result">
+
+                        <h4>${category}</h4>
+
+                        <div class="progress-bar">
+
+                            <div class="progress-fill" style="width: ${data.percentage}%"></div>
+
+                        </div>
+
+                        <p><strong>${Math.round(data.percentage)}%</strong> (${data.score.toFixed(1)}/5.0)</p>
+
+                    </div>
+
+                `;
+
+            }).join('');
+
+ 
+
+            document.getElementById('categoryResults').innerHTML = categoryResultsHTML;
+
+ 
+
+            // Generate recommendations
+
+            generateRecommendations(categoryScores);
+
+        }
+
+ 
+
+        function generateRecommendations(categoryScores) {
+
+            const recommendations = [];
+
+           
+
+            Object.keys(categoryScores).forEach(category => {
+
+                const score = categoryScores[category].percentage;
+
+               
+
+                if (score < 60) {
+
+                    switch(category) {
+
+                        case 'Basic Academic Skills':
+
+                            recommendations.push('Focus on strengthening Ayurvedic fundamentals through regular study of classical texts');
+
+                            break;
+
+                        case 'Clinical Skills':
+
+                            recommendations.push('Practice clinical examination techniques and pulse diagnosis under supervision');
+
+                            break;
+
+                        case 'Diagnostic & Investigation Skills':
+
+                            recommendations.push('Enhance interpretation skills through case studies and practical sessions');
+
+                            break;
+
+                        case 'Treatment & Prescription Skills':
+
+                            recommendations.push('Study Dravyaguna and practice formulation preparation');
+
+                            break;
+
+                        case 'Diet & Lifestyle Planning':
+
+                            recommendations.push('Learn more about Pathya-Apathya and seasonal regimens');
+
+                            break;
+
+                        case 'Panchakarma & Surgical Skills':
+
+                            recommendations.push('Observe and practice Panchakarma procedures under expert guidance');
+
+                            break;
+
+                        case 'Modern Medicine Knowledge':
+
+                            recommendations.push('Study basic modern medicine concepts and emergency protocols');
+
+                            break;
+
+                        case 'Analytical & Reasoning Skills':
+
+                            recommendations.push('Practice case-based learning and clinical reasoning exercises');
+
+                            break;
+
+                        case 'Professional Attitude & Behavior':
+
+                            recommendations.push('Develop communication skills and practice patient-centered care');
+
+                            break;
+
+                    }
+
+                } else if (score < 75) {
+
+                    recommendations.push(`Continue improving ${category} through consistent practice and study`);
+
+                }
+
+            });
+
+ 
+
+            if (recommendations.length === 0) {
+
+                recommendations.push('Excellent performance across all areas! Continue maintaining your standards and consider mentoring junior students.');
+
+            }
+
+ 
+
+            // Add general recommendations
+
+            recommendations.push('Regular self-assessment and peer feedback will help track progress');
+
+            recommendations.push('Attend workshops and continuing education programs');
+
+            recommendations.push('Maintain a learning journal to reflect on clinical experiences');
+
+ 
+
+            const recommendationsHTML = recommendations.map(rec => `<li>${rec}</li>`).join('');
+
+            document.getElementById('recommendationsList').innerHTML = recommendationsHTML;
+
+        }
+
+ 
+
+        function printResults() {
+
+            const printContent = document.getElementById('resultsSection').innerHTML;
+
+            const originalContent = document.body.innerHTML;
+
+           
+
+            document.body.innerHTML = `
+
+                <div style="padding: 20px; font-family: Arial, sans-serif;">
+
+                    <h1 style="text-align: center; color: #2c5530;">Ayurveda Intern Self-Assessment Report</h1>
+
+                    <p style="text-align: center; margin-bottom: 30px;">Generated on: ${new Date().toLocaleDateString()}</p>
+
+                    ${printContent}
+
+                </div>
+
+            `;
+
+           
+
+            window.print();
+
+            document.body.innerHTML = originalContent;
+
+           
+
+            // Re-attach event listeners
+
+            location.reload();
+
+        }
+
+ 
+
+        function resetAssessment() {
+
+            if (confirm('Are you sure you want to start a new assessment? All current data will be lost.')) {
+
+                location.reload();
+
+            }
+
+        }
+
+ 
+
+        // Auto-expand first category on load
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const firstCategory = document.querySelector('.category-header');
+
+            if (firstCategory) {
+
+                toggleCategory(firstCategory);
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
